@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Store - Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class"
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-gray-900 dark:bg-white rounded-lg p-2 transition-colors duration-300">
+                    <svg class="w-5 h-5 text-white dark:text-gray-900" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2L3 7v11h14V7l-7-5zm0 2.236L15 8.118V16H5V8.118L10 4.236z"/>
+                    </svg>
+                </div>
+                <span class="text-lg font-semibold text-gray-900 dark:text-white transition-colors duration-300">Minimal Store</span>
+            </div>
+            <button id="theme-toggle" class="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-105 cursor-pointer">
+                <span id="theme-icon">🌙</span>
+                <span id="theme-text" class="text-sm font-medium hidden sm:inline">Dark mode</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 lg:py-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+
+            <!-- Left Column: Forms -->
+            <div class="lg:col-span-2 space-y-6">
+
+                <!-- 1. Dados Pessoais -->
+                <section class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 p-5 sm:p-6 transition-colors duration-300">
+                    <h2 class="text-base font-semibold text-gray-900 dark:text-white mb-5 flex items-center gap-2">
+                        <span class="text-gray-400 dark:text-gray-500 text-sm">1</span>
+                        Dados Pessoais
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">E-mail para confirmação</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                </span>
+                                <input type="email" value="usuario@example.com.br" class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Nome Completo</label>
+                                <input type="text" value="Lucas Lima" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">CPF</label>
+                                <input type="text" value="143.990.339-84" id="cpf" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Celular / WhatsApp</label>
+                            <input type="tel" value="(41) 98888-3456" id="telefone" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. Endereço de Entrega -->
+                <section class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 p-5 sm:p-6 transition-colors duration-300">
+                    <h2 class="text-base font-semibold text-gray-900 dark:text-white mb-5 flex items-center gap-2">
+                        <span class="text-gray-400 dark:text-gray-500 text-sm">2</span>
+                        Endereço de Entrega
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">CEP</label>
+                                <input type="text" value="81.730-120" id="cep" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Cidade / UF</label>
+                                <input type="text" value="Curitiba, PR" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="sm:col-span-2">
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Logradouro / Número</label>
+                                <input type="text" value="Av. República Argentina, 1285" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Nº / Apt</label>
+                                <input type="text" value="Sala 6" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Complemento (opcional)</label>
+                                <input type="text" placeholder="Ex: Bloco A" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Bairro</label>
+                                <input type="text" value="Portão" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. Forma de Pagamento -->
+                <section class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 p-5 sm:p-6 transition-colors duration-300">
+                    <h2 class="text-base font-semibold text-gray-900 dark:text-white mb-5 flex items-center gap-2">
+                        <span class="text-gray-400 dark:text-gray-500 text-sm">3</span>
+                        Forma de Pagamento
+                    </h2>
+
+                    <!-- Payment Tabs -->
+                    <div class="flex border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden mb-6 transition-colors duration-300">
+                        <button data-tab="cartao" class="payment-tab flex-1 flex flex-col items-center gap-1 py-3 px-4 text-sm font-medium transition-all duration-300 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white border-2 border-gray-900 dark:border-white rounded-xl cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                            Cartão
+                        </button>
+                        <button data-tab="pix" class="payment-tab flex-1 flex flex-col items-center gap-1 py-3 px-4 text-sm font-medium transition-all duration-300 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 relative cursor-pointer">
+                            <span class="absolute -top-2 right-2 sm:right-4 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-10% OFF</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            PIX
+                        </button>
+                        <button data-tab="boleto" class="payment-tab flex-1 flex flex-col items-center gap-1 py-3 px-4 text-sm font-medium transition-all duration-300 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            Boleto
+                        </button>
+                    </div>
+
+                    <!-- Cartão Content -->
+                    <div id="content-cartao" class="payment-content space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Número do Cartão</label>
+                            <div class="relative">
+                                <input type="text" value="4532 •••• •••• 9876" id="cartao-numero" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm pr-14">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-orange-500 font-bold text-xs bg-orange-100 dark:bg-orange-900 px-2 py-0.5 rounded">VISA</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Nome no Cartão</label>
+                            <input type="text" value="LUCAS LIMA" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm uppercase">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Validade</label>
+                                <input type="text" value="08/28" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">CVV</label>
+                                <input type="text" value="•••" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Parcelamento</label>
+                            <select class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm cursor-pointer">
+                                <option>3x de R$ 86,70 sem juros</option>
+                                <option>1x de R$ 260,10 sem juros</option>
+                                <option>2x de R$ 130,05 sem juros</option>
+                                <option>6x de R$ 43,35 sem juros</option>
+                                <option>12x de R$ 24,52 com juros</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- PIX Content -->
+                    <div id="content-pix" class="payment-content hidden space-y-5">
+                        <div class="flex flex-col items-center text-center">
+                            <!-- QR Code SVG -->
+                            <div class="bg-white p-4 rounded-xl mb-4 shadow-sm">
+                                <svg viewBox="0 0 200 200" class="w-40 h-40 sm:w-48 sm:h-48">
+                                    <rect width="200" height="200" fill="white"/>
+                                    <!-- QR Code pattern -->
+                                    <rect x="10" y="10" width="50" height="50" fill="black" rx="4"/>
+                                    <rect x="15" y="15" width="40" height="40" fill="white" rx="2"/>
+                                    <rect x="22" y="22" width="26" height="26" fill="black" rx="2"/>
+                                    <rect x="140" y="10" width="50" height="50" fill="black" rx="4"/>
+                                    <rect x="145" y="15" width="40" height="40" fill="white" rx="2"/>
+                                    <rect x="152" y="22" width="26" height="26" fill="black" rx="2"/>
+                                    <rect x="10" y="140" width="50" height="50" fill="black" rx="4"/>
+                                    <rect x="15" y="145" width="40" height="40" fill="white" rx="2"/>
+                                    <rect x="22" y="152" width="26" height="26" fill="black" rx="2"/>
+                                    <!-- Data modules -->
+                                    <rect x="70" y="10" width="10" height="10" fill="black"/>
+                                    <rect x="90" y="10" width="10" height="10" fill="black"/>
+                                    <rect x="110" y="10" width="10" height="10" fill="black"/>
+                                    <rect x="70" y="30" width="10" height="10" fill="black"/>
+                                    <rect x="100" y="30" width="10" height="10" fill="black"/>
+                                    <rect x="120" y="30" width="10" height="10" fill="black"/>
+                                    <rect x="80" y="50" width="10" height="10" fill="black"/>
+                                    <rect x="110" y="50" width="10" height="10" fill="black"/>
+                                    <rect x="10" y="70" width="10" height="10" fill="black"/>
+                                    <rect x="30" y="70" width="10" height="10" fill="black"/>
+                                    <rect x="50" y="70" width="10" height="10" fill="black"/>
+                                    <rect x="80" y="70" width="10" height="10" fill="black"/>
+                                    <rect x="100" y="70" width="10" height="10" fill="black"/>
+                                    <rect x="130" y="70" width="10" height="10" fill="black"/>
+                                    <rect x="150" y="70" width="10" height="10" fill="black"/>
+                                    <rect x="170" y="70" width="10" height="10" fill="black"/>
+                                    <rect x="20" y="90" width="10" height="10" fill="black"/>
+                                    <rect x="50" y="90" width="10" height="10" fill="black"/>
+                                    <rect x="70" y="90" width="10" height="10" fill="black"/>
+                                    <rect x="90" y="90" width="10" height="10" fill="black"/>
+                                    <rect x="120" y="90" width="10" height="10" fill="black"/>
+                                    <rect x="140" y="90" width="10" height="10" fill="black"/>
+                                    <rect x="180" y="90" width="10" height="10" fill="black"/>
+                                    <rect x="40" y="110" width="10" height="10" fill="black"/>
+                                    <rect x="70" y="110" width="10" height="10" fill="black"/>
+                                    <rect x="100" y="110" width="10" height="10" fill="black"/>
+                                    <rect x="130" y="110" width="10" height="10" fill="black"/>
+                                    <rect x="160" y="110" width="10" height="10" fill="black"/>
+                                    <rect x="180" y="110" width="10" height="10" fill="black"/>
+                                    <rect x="70" y="130" width="10" height="10" fill="black"/>
+                                    <rect x="90" y="130" width="10" height="10" fill="black"/>
+                                    <rect x="110" y="130" width="10" height="10" fill="black"/>
+                                    <rect x="140" y="130" width="10" height="10" fill="black"/>
+                                    <rect x="170" y="130" width="10" height="10" fill="black"/>
+                                    <rect x="80" y="150" width="10" height="10" fill="black"/>
+                                    <rect x="100" y="150" width="10" height="10" fill="black"/>
+                                    <rect x="130" y="150" width="10" height="10" fill="black"/>
+                                    <rect x="160" y="150" width="10" height="10" fill="black"/>
+                                    <rect x="80" y="170" width="10" height="10" fill="black"/>
+                                    <rect x="110" y="170" width="10" height="10" fill="black"/>
+                                    <rect x="140" y="170" width="10" height="10" fill="black"/>
+                                    <rect x="160" y="170" width="10" height="10" fill="black"/>
+                                    <rect x="180" y="170" width="10" height="10" fill="black"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 max-w-xs">Abra o app do seu banco, escolha pagar via PIX e escaneie o código acima ou copie a chave abaixo.</p>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input type="text" value="00020126580014br.gov.bcb.pix0136a1b2c3d4-e5f6-7890..." readonly class="flex-1 px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs font-mono transition-colors duration-300">
+                            <button id="btn-copiar-pix" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 cursor-pointer">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Boleto Content -->
+                    <div id="content-boleto" class="payment-content hidden space-y-5">
+                        <div class="text-center space-y-4">
+                            <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-600 transition-colors duration-300">
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Linha digitável</p>
+                                <p class="font-mono text-sm text-gray-900 dark:text-white break-all">23793.38128 60000.000003 00000.000400 1 84340000026010</p>
+                            </div>
+                            <!-- Barcode illustration -->
+                            <div class="flex justify-center gap-[1px] py-3">
+                                <div class="w-[2px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[3px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-transparent"></div><div class="w-[2px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-transparent"></div><div class="w-[1px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[3px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-transparent"></div><div class="w-[2px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-transparent"></div><div class="w-[3px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[2px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-transparent"></div><div class="w-[1px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[2px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-transparent"></div><div class="w-[3px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[2px] h-12 bg-transparent"></div><div class="w-[1px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[3px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-transparent"></div><div class="w-[2px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-transparent"></div><div class="w-[3px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[2px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[1px] h-12 bg-transparent"></div><div class="w-[1px] h-12 bg-gray-900 dark:bg-white"></div><div class="w-[2px] h-12 bg-gray-900 dark:bg-white"></div>
+                            </div>
+                            <button id="btn-copiar-boleto" class="px-5 py-2.5 bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-gray-900 text-sm font-medium rounded-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 mx-auto cursor-pointer">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                <span>Copiar</span>
+                            </button>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">O boleto será compensado em até 3 dias úteis após o pagamento.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Right Column: Resumo da Compra -->
+            <div class="lg:col-span-1">
+                <div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 p-5 sm:p-6 sticky top-24 transition-colors duration-300">
+                    <div class="flex items-center justify-between mb-5">
+                        <h2 class="text-base font-semibold text-gray-900 dark:text-white">Resumo da Compra</h2>
+                        <span class="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full transition-colors duration-300">1 item</span>
+                    </div>
+
+                    <!-- Product -->
+                    <div class="flex gap-3 pb-5 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                        <div class="w-14 h-14 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                            <svg class="w-7 h-7 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-semibold text-gray-900 dark:text-white truncate">Headphone Bluetooth ANC</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Preto Fosco • Conexão Sem Fio</p>
+                            <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-1">R$ 289,00</p>
+                        </div>
+                    </div>
+
+                    <!-- Cupom -->
+                    <div class="py-4 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                        <div class="flex gap-2">
+                            <input type="text" id="cupom-input" placeholder="Cupom de desconto" class="flex-1 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 text-sm">
+                            <button id="btn-aplicar-cupom" class="px-4 py-2 border border-gray-300 dark:border-gray-500 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 hover:scale-105 cursor-pointer">
+                                Aplicar
+                            </button>
+                        </div>
+                        <p id="cupom-msg" class="text-xs mt-2 hidden"></p>
+                    </div>
+
+                    <!-- Totais -->
+                    <div class="py-4 space-y-2.5 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500 dark:text-gray-400">Subtotal</span>
+                            <span class="text-gray-900 dark:text-white font-medium">R$ 289,00</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500 dark:text-gray-400">Frete Express</span>
+                            <span class="text-emerald-600 dark:text-emerald-400 font-medium">Grátis</span>
+                        </div>
+                        <div id="linha-desconto" class="flex justify-between text-sm">
+                            <span class="text-gray-500 dark:text-gray-400">Desconto</span>
+                            <span id="valor-desconto" class="text-red-500 font-medium">- R$ 28,90</span>
+                        </div>
+                    </div>
+
+                    <!-- Total -->
+                    <div class="pt-4 pb-5">
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Total</span>
+                            <div class="text-right">
+                                <span id="total-valor" class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">R$ 260,10</span>
+                                <p id="total-parcelas" class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">3x de R$ 86,70 sem juros</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <button id="btn-finalizar" class="w-full py-3.5 bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-gray-900 font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] text-sm flex items-center justify-center gap-2 cursor-pointer">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        <span id="btn-finalizar-text">Finalizar Pedido • R$ 260,10</span>
+                    </button>
+
+                    <!-- Trust Badges -->
+                    <div class="mt-4 space-y-2">
+                        <p class="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Entrega segura e rastreável
+                        </p>
+                        <p class="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Garantia de 30 dias ou dinheiro de volta
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 transition-colors duration-300 mt-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-5 text-center">
+            <p class="text-xs text-gray-400 dark:text-gray-500">
+                © 2024 Minimal Store. Todos os direitos reservados. Ambiente seguro com criptografia SSL 🔒
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
